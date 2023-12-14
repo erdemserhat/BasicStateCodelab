@@ -20,12 +20,43 @@ import androidx.lifecycle.Observer
 @Composable
 fun WaterCounter(modifier: Modifier = Modifier) {
     Column(modifier = modifier.padding(16.dp)) {
-        var count by remember { mutableStateOf(0) }
+        var count by rememberSaveable { mutableStateOf(0) }
         if (count > 0) {
             Text("You've had $count glasses.")
         }
         Button(onClick = { count++ }, Modifier.padding(top = 8.dp), enabled = count < 10) {
             Text("Add one")
         }
+
     }
+}
+
+@Composable
+fun StatefullWaterCounter(modifier: Modifier = Modifier){
+    var count by rememberSaveable {
+        mutableStateOf(0)
+    }
+
+    StatelessWaterCounter(count = count, onClick = { count++ },modifier)
+
+}
+
+
+@Composable
+fun StatelessWaterCounter(
+    count:Int,
+    onClick:()->Unit,
+    modifier: Modifier = Modifier
+){
+    Column(modifier.padding(16.dp)) {
+        Text(
+            text="You've had $count glasses",
+            modifier = Modifier.padding(top=5.dp, bottom = 5.dp)
+        )
+        Button(onClick = onClick) {
+            Text(text = "Add One")
+
+        }
+    }
+
 }
