@@ -38,3 +38,4 @@ fun WellnessTaskItem(
 fun PreviewWellnessTaskItem(){
     WellnessTaskItem("Drink Water",{},)
 }
+
